@@ -1,6 +1,6 @@
 # Rest_App_banking
-mini banking app for learn and improve my skill as a back-end developper . 
-this restfull api allow somerequirement:
+mini banking app for learn and improve my skill as a java back-end developper . 
+this restfull api allow some requirement:
   -  create an account
   -  transfer money
   -  make a deposit
