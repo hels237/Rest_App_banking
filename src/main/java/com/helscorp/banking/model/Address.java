@@ -10,28 +10,27 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-
 @Builder
+@AllArgsConstructor
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "Account")
-public class Account {
+@Table(name = "Address")
+public class Address {
 
     private Integer id ;
 
-    private String iban ;
+    private String street ;
 
-    private LocalDateTime creationDate ;
+    private Integer houseNumber ;
 
-    private LocalDateTime lstUpdate ;
+    private Integer postalCode ;
+
+    private String city ;
+
+    private String country ;
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user ;
-
-
 }
