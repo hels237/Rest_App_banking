@@ -1,24 +1,19 @@
 package com.helscorp.banking.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@Builder
+
 @AllArgsConstructor
 @Data
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Entity
-@Table(name = "Address")
-public class Address {
-
-    private Integer id ;
+@Table(name = "address")
+public class Address extends AbstractEntity {
 
     private String street ;
 
@@ -31,6 +26,6 @@ public class Address {
     private String country ;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id_user")
     private User user ;
 }

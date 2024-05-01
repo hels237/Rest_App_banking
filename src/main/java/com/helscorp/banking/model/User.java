@@ -1,31 +1,24 @@
 package com.helscorp.banking.model;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 
-@Builder
+
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "User")
-public class User {
+@Table(name = "_user")
+public class User extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name")
     private String lastName;
 
     private String email;
@@ -34,19 +27,19 @@ public class User {
 
     private boolean active ;
 
-    @OneToOne
+    @OneToOne//(mappedBy = "user")
     private Address address;
 
     @OneToMany(mappedBy = "user")
-    private List<Transaction> transactionList;
+    private List<BankOperation> bankOperationList;
 
     @OneToMany(mappedBy = "user")
     private List<Contact> contactList;
 
-    @OneToOne
+    @OneToOne//(mappedBy = "user")
     private Role role ;
 
-    @OneToOne
+    @OneToOne//(mappedBy = "user")
     private Account account ;
 
 

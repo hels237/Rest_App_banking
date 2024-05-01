@@ -2,27 +2,26 @@ package com.helscorp.banking.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Builder
+
 @Data
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Transaction")
-public class Transaction {
-
-    private Integer id ;
+@Entity
+@Table(name = "bank_operation")
+public class BankOperation extends  AbstractEntity{
 
     private BigDecimal amount ;
 
     @Enumerated(EnumType.STRING)
-    private TransactionType type ;
+    private OperationType type ;
 
     private String destinationIban ;
 
@@ -31,7 +30,7 @@ public class Transaction {
     private LocalDateTime lastUpdate ;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id_user")
     private User user;
 
 
