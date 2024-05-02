@@ -23,6 +23,7 @@ public class AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id ;
 
+
     @CreatedDate
     @Column(
             nullable = false,
