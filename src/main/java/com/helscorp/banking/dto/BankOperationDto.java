@@ -3,6 +3,7 @@ package com.helscorp.banking.dto;
 
 import com.helscorp.banking.model.BankOperation;
 import com.helscorp.banking.model.OperationType;
+import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,6 +14,9 @@ import java.time.LocalDateTime;
 @Builder
 public class BankOperationDto {
 
+    @Positive
+    @Min(value = 10)
+    @Max(value = 1000000)
     private BigDecimal amount ;
 
     private OperationType type ;
@@ -20,6 +24,7 @@ public class BankOperationDto {
     private String destinationIban ;
 
     private LocalDateTime creationDate ;
+
 
     private LocalDateTime lastUpdate ;
 

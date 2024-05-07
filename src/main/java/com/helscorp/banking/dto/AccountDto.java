@@ -3,13 +3,18 @@ package com.helscorp.banking.dto;
 
 import com.helscorp.banking.model.Account;
 import com.helscorp.banking.model.User;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
 public class AccountDto {
-
+    @NotNull
+    @NotEmpty
+    @NotBlank
     private String iban ;
 
     private UserDto user ;

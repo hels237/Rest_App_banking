@@ -2,6 +2,9 @@ package com.helscorp.banking.dto;
 
 
 import com.helscorp.banking.model.Role;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,6 +13,9 @@ import lombok.Data;
 @Builder
 public class RoleDto {
 
+    @NotNull
+    @NotEmpty
+    @NotBlank
     private String name ;
 
     private  UserDto user;

@@ -2,6 +2,7 @@ package com.helscorp.banking.dto;
 
 
 import com.helscorp.banking.model.User;
+import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,12 +10,26 @@ import lombok.Data;
 @Data
 public class UserDto {
 
+    @NotNull
+    @NotEmpty
+    @NotBlank
     private String firstName;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank
     private String lastName;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank
+    @Email
     private String email;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank
+    @Size(min = 8,max = 16)
     private String password;
 
 
