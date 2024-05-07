@@ -10,9 +10,9 @@ import lombok.Data;
 @Data
 public class UserDto {
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
+    @NotNull(message = "the name can't be null")
+    @NotEmpty(message = " the name can't be empty")
+    @NotBlank(message = "the name can't be empty or blank")
     private String firstName;
 
     @NotNull

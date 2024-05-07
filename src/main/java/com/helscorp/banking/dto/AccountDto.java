@@ -17,6 +17,9 @@ public class AccountDto {
     @NotBlank
     private String iban ;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank
     private UserDto user ;
 
     public static AccountDto fromEntity(Account account){
