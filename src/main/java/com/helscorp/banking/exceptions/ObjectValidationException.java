@@ -1,7 +1,6 @@
-package com.helscorp.banking;
+package com.helscorp.banking.exceptions;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Set;

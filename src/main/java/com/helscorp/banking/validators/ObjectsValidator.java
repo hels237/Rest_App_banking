@@ -1,5 +1,6 @@
-package com.helscorp.banking;
+package com.helscorp.banking.validators;
 
+import com.helscorp.banking.exceptions.ObjectValidationException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -33,6 +34,8 @@ public class ObjectsValidator <T> {
 
             //todo throw an exception
             throw new ObjectValidationException(errorMessages,objectToValidate.getClass().getName());
+
+
         }
     }
 }
