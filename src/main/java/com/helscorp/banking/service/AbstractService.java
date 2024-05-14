@@ -1,14 +1,16 @@
 package com.helscorp.banking.service;
 
+import com.helscorp.banking.dto.UserDto;
+
 import java.util.List;
 
 public interface AbstractService<T> {
 
-    Integer save();
+    Integer save(T object);
 
     List<T> findAll();
 
     T findById(Integer id);
 
-    void delete(T object);
+    void delete(Integer id);
 }
