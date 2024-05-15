@@ -69,6 +69,13 @@
 <!--			<scope>test</scope>-->
 <!--		</dependency>-->
 
+	<dependency>
+		<groupId>com.github.passionjava4</groupId>
+		<artifactId>iban4j</artifactId>
+		<version>3.2.2</version>
+	</dependency>
+
+
 	</dependencies>
 
 	<build>

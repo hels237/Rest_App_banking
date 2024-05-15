@@ -12,6 +12,9 @@ import lombok.Data;
 @Data
 @Builder
 public class AccountDto {
+
+    private Integer id;
+
     @NotNull
     @NotEmpty
     @NotBlank
@@ -22,6 +25,9 @@ public class AccountDto {
     @NotBlank
     private UserDto user ;
 
+
+
+
     public static AccountDto fromEntity(Account account){
 
         if(account == null){
@@ -30,6 +36,7 @@ public class AccountDto {
         }
         return AccountDto
                 .builder()
+                .id(account.getId())
                 .iban(account.getIban())
                 .user(UserDto.fromEntity(account.getUser()))
                 .build();
@@ -43,6 +50,7 @@ public class AccountDto {
         }
         return Account
                 .builder()
+                .id(accountDto.getId())
                 .iban(accountDto.getIban())
                 .user(UserDto.toEntity(accountDto.getUser()))
                 .build();
