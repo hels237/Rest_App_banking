@@ -52,6 +52,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void delete(Integer id) {
+
         if (id == null){
             throw new InvalidOperationException("invalid id"," id Null",Address.class.getName());
         }

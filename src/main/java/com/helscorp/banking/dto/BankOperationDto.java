@@ -15,8 +15,6 @@ import java.time.LocalDateTime;
 public class BankOperationDto {
 
     @Positive
-    @Min(value = 10)
-    @Max(value = 1000000)
     private BigDecimal amount ;
 
     private OperationType type ;
@@ -25,8 +23,10 @@ public class BankOperationDto {
 
     private LocalDateTime creationDate ;
 
-
     private LocalDateTime lastUpdate ;
+
+
+
 
     public static BankOperationDto fromEntity(BankOperation bankOperation){
 
