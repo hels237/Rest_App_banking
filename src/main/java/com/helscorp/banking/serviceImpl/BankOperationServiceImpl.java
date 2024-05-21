@@ -66,10 +66,16 @@ public class BankOperationServiceImpl implements BankOperationService {
         bankOperationRepository.deleteById(id);
     }
 
+    @Override
+    public List<BankOperationDto> findAllByUserId(Integer userId) {
+        return bankOperationRepository.findAllByUserId(userId).stream().map(BankOperationDto::fromEntity).toList();
+    }
 
     /******************************************** convenient methods ***********************************/
 
     private int getBankOperationType(OperationType type){
         return OperationType.TRANSFER == type ? -1 : 1;
     }
+
+
 }
