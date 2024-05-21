@@ -25,18 +25,23 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Integer save(AccountDto dto) {
 
-        if(dto.getId() == null){
-            throw new InvalidOperationException("Account can not be update ","save the account ", Account.class.getName());
-        }
-
         // validate the object
         validator.validate(dto);
 
         // convert accountDto to account entity
         Account account = AccountDto.toEntity(dto);
 
-        //generate random IBAN
-        account.setIban(generateRandomIban());
+        boolean isAccountUserAlreadyExist = accountRepository.findByUserId(account.getUser().getId()).isPresent();
+
+        if(isAccountUserAlreadyExist){
+            throw  new InvalidOperationException("Account already exist ","can't create new Account",Account.class.getName());
+        }
+
+        if(dto.getId() == null){
+
+            //generate random IBAN
+            account.setIban(generateRandomIban());
+        }
 
         return accountRepository.save(account).getId();
 
@@ -45,6 +50,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<AccountDto> findAll() {
+
         return accountRepository.findAll().stream().map(AccountDto::fromEntity).toList();
     }
 
