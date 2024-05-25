@@ -43,6 +43,7 @@ public class UserController {
     }
 
     public ResponseEntity<Void> delete(@PathVariable("user-id") Integer userId){
+        userService.delete(userId);
         return ResponseEntity.accepted().build();
     }
 
