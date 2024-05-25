@@ -21,9 +21,10 @@ public interface BankOperationRepository extends JpaRepository<BankOperation,Int
     BigDecimal findAccountBalance(Integer userId);
 
 
-    @Query("select max(abs(b.amount)) from BankOperation b where b.user.is = :userId and b.type = :type")
+    @Query("select max(abs(b.amount)) from BankOperation b where b.user.id = :userId and b.type = :type")
     BigDecimal findHighestTransferAmount(Integer userId, OperationType type);
 
     @Query("select b.createdDate, sum(b.amount) from BankOperation b where b.user.id = :userId and b.createdDate between :start and :end")
     Map<LocalDate, BigDecimal> findSumBankOperationByDate(LocalDateTime start, LocalDateTime end, Integer userId);
+
 }

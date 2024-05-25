@@ -50,4 +50,5 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(errorResponse);
     }
+
 }
