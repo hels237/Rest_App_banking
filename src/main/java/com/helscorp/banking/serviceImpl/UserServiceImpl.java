@@ -2,15 +2,12 @@ package com.helscorp.banking.serviceImpl;
 
 import com.helscorp.banking.dto.AccountDto;
 import com.helscorp.banking.dto.UserDto;
-import com.helscorp.banking.model.Account;
 import com.helscorp.banking.model.User;
-import com.helscorp.banking.repositories.AccountRepository;
 import com.helscorp.banking.repositories.UserRepository;
 import com.helscorp.banking.service.AccountService;
 import com.helscorp.banking.service.UserService;
 import com.helscorp.banking.validators.ObjectsValidator;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -68,22 +65,30 @@ public class UserServiceImpl implements UserService {
     }
 
 
+
     @Override
     public Integer validateUserAccount(Integer id) {
+
         //validate user
-        User user = repository.findById(id).orElseThrow(()-> new EntityNotFoundException("user not found to validate with id : "+id));
+        User user = repository.findById(id)
+                .orElseThrow(
+                        ()-> new EntityNotFoundException("user not found to validate with id : "+id)
+                );
 
         //activate user account
         user.setActive(true);
 
         //create an account for the user
-        AccountDto account = AccountDto.builder().user(UserDto.fromEntity(user)).build();
+        AccountDto accountDto = AccountDto
+                                    .builder()
+                                    .userDto(UserDto.fromEntity(user))
+                                    .build();
 
-        accountService.save(account);
-        repository.save(user);
+        accountService.save(accountDto);
 
         return user.getId() ;
     }
+
 
     @Override
     public Integer invalidateUseAccount(Integer id) {

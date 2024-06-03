@@ -21,13 +21,14 @@ public class User extends AbstractEntity{
 
     private String lastName;
 
+    @Column(unique = true)
     private String email;
 
     private String password;
 
     private boolean active ;
 
-    @OneToOne//(mappedBy = "user")
+    @OneToOne(mappedBy = "user")
     private Address address;
 
     @OneToMany(mappedBy = "user")
@@ -36,10 +37,10 @@ public class User extends AbstractEntity{
     @OneToMany(mappedBy = "user")
     private List<Contact> contactList;
 
-    @OneToOne//(mappedBy = "user")
+    @OneToOne(mappedBy = "user")
     private Role role ;
 
-    @OneToOne//(mappedBy = "user")
+    @OneToOne(mappedBy = "user")
     private Account account ;
 
 

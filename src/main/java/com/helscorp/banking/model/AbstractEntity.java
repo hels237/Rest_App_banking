@@ -31,6 +31,7 @@ public class AbstractEntity {
     )
     private LocalDateTime createdDate;
 
+
     @LastModifiedDate
     private LocalDateTime lastUpdate;
 

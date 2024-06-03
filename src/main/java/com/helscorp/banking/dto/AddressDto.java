@@ -14,24 +14,20 @@ public class AddressDto {
 
     @NotNull
     @NotEmpty
-    @NotBlank
     private String street ;
 
     @NotNull
     @NotEmpty
-    @NotBlank
     private Integer houseNumber ;
 
     private Integer postalCode ;
 
     @NotNull
     @NotEmpty
-    @NotBlank
     private String city ;
 
     @NotNull
     @NotEmpty
-    @NotBlank
     private String country ;
 
 

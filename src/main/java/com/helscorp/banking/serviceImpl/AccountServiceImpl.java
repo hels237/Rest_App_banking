@@ -1,10 +1,14 @@
 package com.helscorp.banking.serviceImpl;
 
 import com.helscorp.banking.dto.AccountDto;
+import com.helscorp.banking.dto.UserDto;
 import com.helscorp.banking.exceptions.InvalidOperationException;
 import com.helscorp.banking.model.Account;
+import com.helscorp.banking.model.User;
 import com.helscorp.banking.repositories.AccountRepository;
+import com.helscorp.banking.repositories.UserRepository;
 import com.helscorp.banking.service.AccountService;
+import com.helscorp.banking.service.UserService;
 import com.helscorp.banking.validators.ObjectsValidator;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +18,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+
 @Service
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
+    private final UserRepository userRepository;
+
 
     private final ObjectsValidator<AccountDto> validator;
 
@@ -31,11 +39,14 @@ public class AccountServiceImpl implements AccountService {
         // convert accountDto to account entity
         Account account = AccountDto.toEntity(dto);
 
+        // check if account already exist
         boolean isAccountUserAlreadyExist = accountRepository.findByUserId(account.getUser().getId()).isPresent();
 
         if(isAccountUserAlreadyExist){
             throw  new InvalidOperationException("Account already exist ","can't create new Account",Account.class.getName());
         }
+
+
 
         if(dto.getId() == null){
 
@@ -71,7 +82,7 @@ public class AccountServiceImpl implements AccountService {
     private String generateRandomIban(){
 
         //generate an iban
-        String iban = Iban.random(CountryCode.CM).toFormattedString();
+        String iban = Iban.random(CountryCode.DE).toFormattedString();
 
         // check if the iban already exist
         boolean ibanExist = accountRepository.findByIban(iban).isPresent();

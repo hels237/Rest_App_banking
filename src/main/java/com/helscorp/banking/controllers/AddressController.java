@@ -32,7 +32,7 @@ public class AddressController {
         return ResponseEntity.ok(addressService.findAll());
     }
 
-    @DeleteMapping("/{address-id")
+    @DeleteMapping("/{address-id}")
     public ResponseEntity<Void> delete(@PathVariable("address-id") Integer id){
         addressService.delete(id);
         return ResponseEntity.accepted().build();

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface StatisticService {
 
-    Map<LocalDate, BigDecimal> findSumBankOperationByDate(LocalDate startDate , LocalDate endDate, BigDecimal amount, Integer userId);
+    Map<LocalDate, BigDecimal> findSumBankOperationByDate(LocalDate startDate , LocalDate endDate,Integer userId);
 
     BigDecimal geAccountBalance(Integer userId);
 

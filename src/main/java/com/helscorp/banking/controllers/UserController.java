@@ -27,6 +27,7 @@ public class UserController {
         return ResponseEntity.ok(userService.findAll());
     }
 
+
     @GetMapping("/{user-id}")
     public ResponseEntity<UserDto> findById(@PathVariable("user-id") Integer userId){
         return ResponseEntity.ok(userService.findById(userId));
@@ -42,6 +43,7 @@ public class UserController {
         return ResponseEntity.ok(userService.invalidateUseAccount(userId));
     }
 
+    @DeleteMapping("/{user-id}")
     public ResponseEntity<Void> delete(@PathVariable("user-id") Integer userId){
         userService.delete(userId);
         return ResponseEntity.accepted().build();

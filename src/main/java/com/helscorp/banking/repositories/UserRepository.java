@@ -29,11 +29,11 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     public List<User> searchByFirstName(String firstName);
 
     //select * from user where firstName  like '%max%'
-    @Query("from User where firstName like '%:firstName@'")
+    @Query("from User where firstName like '%:firstName%'")
     public List<User> searchAllByFirstNameContaining(String firstName);
 
     //select * from user u inner join account a on a.id = u.id_account where and a.iban = '1234567254127'
-    @Query("from User u inner join Account a on a.id = u.id_account where a.iban = :iban")
+    @Query("from User u inner join Account a on a.id = u.id where a.iban = :iban")
     public List<User> searchByAccountIban(String iban);
 
 

@@ -2,8 +2,6 @@ package com.helscorp.banking.dto;
 
 
 import com.helscorp.banking.model.Account;
-import com.helscorp.banking.model.User;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -15,15 +13,11 @@ public class AccountDto {
 
     private Integer id;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
+
     private String iban ;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
-    private UserDto user ;
+
+    private UserDto userDto;
 
 
 
@@ -36,9 +30,8 @@ public class AccountDto {
         }
         return AccountDto
                 .builder()
-                .id(account.getId())
                 .iban(account.getIban())
-                .user(UserDto.fromEntity(account.getUser()))
+                .userDto(UserDto.fromEntity(account.getUser()))
                 .build();
     }
 
@@ -50,9 +43,9 @@ public class AccountDto {
         }
         return Account
                 .builder()
-                .id(accountDto.getId())
                 .iban(accountDto.getIban())
-                .user(UserDto.toEntity(accountDto.getUser()))
+                .user(UserDto.toEntity(accountDto.getUserDto()))
                 .build();
     }
+
 }

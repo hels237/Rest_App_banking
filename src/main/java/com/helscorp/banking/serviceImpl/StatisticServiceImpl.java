@@ -20,7 +20,7 @@ public class StatisticServiceImpl implements StatisticService {
 
 
     @Override
-    public Map<LocalDate, BigDecimal> findSumBankOperationByDate(LocalDate startDate, LocalDate endDate, BigDecimal amount, Integer userId) {
+    public Map<LocalDate, BigDecimal> findSumBankOperationByDate(LocalDate startDate, LocalDate endDate, Integer userId) {
 
         //LocalDateTime.of(LocalDate , LocalTime.of(hour,minute,second))
         LocalDateTime start = LocalDateTime.of(startDate, LocalTime.of(0,0,0));
@@ -43,4 +43,6 @@ public class StatisticServiceImpl implements StatisticService {
     public BigDecimal highestDeposit(Integer userId) {
         return transactionRepository.findHighestTransferAmount(userId, OperationType.DEPOSIT);
     }
+
+
 }

@@ -31,7 +31,7 @@ public class AccountController {
         return ResponseEntity.ok(accountService.findAll());
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("/{account-id}")
     public ResponseEntity<Void> delete(@PathVariable("account-id") Integer accountId){
         accountService.delete(accountId);
         return ResponseEntity.accepted().build();

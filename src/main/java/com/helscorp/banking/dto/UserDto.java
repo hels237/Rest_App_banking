@@ -2,7 +2,10 @@ package com.helscorp.banking.dto;
 
 
 import com.helscorp.banking.model.User;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,26 +13,24 @@ import lombok.Data;
 @Data
 public class UserDto {
 
-    @NotNull(message = "the name can't be null")
-    @NotEmpty(message = " the name can't be empty")
-    @NotBlank(message = "the name can't be empty or blank")
+    private Integer id;
+
+    @NotNull(message = "the firstname can't be null")
+    @NotEmpty(message = " the firstname can't be empty")
     private String firstName;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
+    @NotNull(message = "the lastname can't be null")
+    @NotEmpty(message = "the lastname can't be empty")
     private String lastName;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
+    @NotNull(message = "the email can't be null")
+    @NotEmpty(message = "the email can't be null")
     @Email
     private String email;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
-    @Size(min = 8,max = 16)
+    @NotNull(message = "password can't be null")
+    @NotEmpty(message = "password can't be empty")
+    @Size(min = 6,max = 16,message = "password must be between 6 and 16")
     private String password;
 
 
@@ -40,6 +41,7 @@ public class UserDto {
             //todo throw an exception
         }
         return  UserDto.builder()
+                .id(user.getId())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
@@ -54,11 +56,15 @@ public class UserDto {
             return null;
             //todo throw an exception
         }
+
         return User.builder()
+                .id(userDto.getId())
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
                 .email(userDto.getEmail())
                 .password(userDto.getPassword())
                 .build();
     }
+
+
 }
