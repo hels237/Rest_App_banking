@@ -11,7 +11,8 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "_user")
@@ -19,14 +20,16 @@ public class User extends AbstractEntity{
 
     private String firstName;
 
+
     private String lastName;
 
-    @Column(unique = true)
+
+    //@Column(unique = true)
     private String email;
 
     private String password;
 
-    private boolean active ;
+    private boolean accountIsActive ;
 
     @OneToOne(mappedBy = "user")
     private Address address;

@@ -1,14 +1,11 @@
 package com.helscorp.banking.serviceImpl;
 
 import com.helscorp.banking.dto.AccountDto;
-import com.helscorp.banking.dto.UserDto;
 import com.helscorp.banking.exceptions.InvalidOperationException;
 import com.helscorp.banking.model.Account;
-import com.helscorp.banking.model.User;
 import com.helscorp.banking.repositories.AccountRepository;
 import com.helscorp.banking.repositories.UserRepository;
 import com.helscorp.banking.service.AccountService;
-import com.helscorp.banking.service.UserService;
 import com.helscorp.banking.validators.ObjectsValidator;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +14,7 @@ import org.iban4j.Iban;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import java.util.Optional;
 
 
 @Service
@@ -39,22 +36,30 @@ public class AccountServiceImpl implements AccountService {
         // convert accountDto to account entity
         Account account = AccountDto.toEntity(dto);
 
-        // check if account already exist
-        boolean isAccountUserAlreadyExist = accountRepository.findByUserId(account.getUser().getId()).isPresent();
+        Optional<Account> theAccount = accountRepository.findByUserId(account.getUser().getId());
 
-        if(isAccountUserAlreadyExist){
-            throw  new InvalidOperationException("Account already exist ","can't create new Account",Account.class.getName());
+        // check if account already exist
+        boolean isAccountUserNotExist = accountRepository.findByUserId(account.getUser().getId()).isEmpty(); ;
+
+        if(isAccountUserNotExist && account.getUser().isAccountIsActive()){
+            throw  new InvalidOperationException("Account already exist ",
+                    "can't create new Account",
+                    Account.class.getName());
         }
 
 
-
-        if(dto.getId() == null){
-
+        if(dto.getId() == null && isAccountUserNotExist){
             //generate random IBAN
             account.setIban(generateRandomIban());
         }
 
-        return accountRepository.save(account).getId();
+        if (theAccount.isPresent()){
+            theAccount.get().setUser(account.getUser());
+            return accountRepository.save(theAccount.get()).getId();
+        }else {
+            return accountRepository.save(account).getId();
+        }
+
 
     }
 

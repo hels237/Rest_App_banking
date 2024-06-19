@@ -3,6 +3,7 @@ package com.helscorp.banking.serviceImpl;
 import com.helscorp.banking.dto.AccountDto;
 import com.helscorp.banking.dto.UserDto;
 import com.helscorp.banking.model.User;
+import com.helscorp.banking.repositories.AccountRepository;
 import com.helscorp.banking.repositories.UserRepository;
 import com.helscorp.banking.service.AccountService;
 import com.helscorp.banking.service.UserService;
@@ -10,6 +11,7 @@ import com.helscorp.banking.validators.ObjectsValidator;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -75,19 +77,28 @@ public class UserServiceImpl implements UserService {
                         ()-> new EntityNotFoundException("user not found to validate with id : "+id)
                 );
 
-        //activate user account
-        user.setActive(true);
-
         //create an account for the user
-        AccountDto accountDto = AccountDto
-                                    .builder()
-                                    .userDto(UserDto.fromEntity(user))
-                                    .build();
+        AccountDto accountDto = AccountDto.builder().userDto(UserDto.fromEntity(user)).build();
 
         accountService.save(accountDto);
 
+        //activate user account
+        user.setAccountIsActive(true);
+        repository.save(user);
+
         return user.getId() ;
     }
+
+
+
+/*    public Integer validateUserAccount2(Integer id){
+
+        User user = repository.findById(id).orElseThrow(()-> new EntityNotFoundException("user not found with the Id : "+id));
+
+
+
+    }*/
+
 
 
     @Override
@@ -95,7 +106,7 @@ public class UserServiceImpl implements UserService {
 
         User user = repository.findById(id).orElseThrow(()-> new EntityNotFoundException("user not found to validate with id : "+id));
         // enable user account
-        user.setActive(false);
+        user.setAccountIsActive(false);
 
         repository.save(user);
 
