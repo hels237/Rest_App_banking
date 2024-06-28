@@ -39,9 +39,9 @@ public class AccountServiceImpl implements AccountService {
         Optional<Account> theAccount = accountRepository.findByUserId(account.getUser().getId());
 
         // check if account already exist
-        boolean isAccountUserNotExist = accountRepository.findByUserId(account.getUser().getId()).isEmpty(); ;
+        boolean isAccountUserNotExist = accountRepository.findByUserId(theAccount.get().getUser().getId()).isEmpty(); ;
 
-        if(isAccountUserNotExist && account.getUser().isAccountIsActive()){
+        if(!isAccountUserNotExist && theAccount.get().getUser().isAccountIsActive()){
             throw  new InvalidOperationException("Account already exist ",
                     "can't create new Account",
                     Account.class.getName());
@@ -54,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
         }
 
         if (theAccount.isPresent()){
-            theAccount.get().setUser(account.getUser());
+            //theAccount.get().setUser(account.getUser());
             return accountRepository.save(theAccount.get()).getId();
         }else {
             return accountRepository.save(account).getId();

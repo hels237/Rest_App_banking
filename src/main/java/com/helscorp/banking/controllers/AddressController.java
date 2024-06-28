@@ -3,12 +3,14 @@ package com.helscorp.banking.controllers;
 
 import com.helscorp.banking.dto.AddressDto;
 import com.helscorp.banking.service.AddressService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "address api")
 @RestController
 @RequestMapping("/sddresses")
 @RequiredArgsConstructor

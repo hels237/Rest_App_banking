@@ -3,12 +3,14 @@ package com.helscorp.banking.controllers;
 
 import com.helscorp.banking.dto.BankOperationDto;
 import com.helscorp.banking.service.BankOperationService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "transaction api")
 @RestController
 @RequestMapping("/transactions")
 @RequiredArgsConstructor

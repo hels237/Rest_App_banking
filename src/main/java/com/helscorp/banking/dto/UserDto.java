@@ -2,6 +2,7 @@ package com.helscorp.banking.dto;
 
 
 import com.helscorp.banking.model.User;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -16,16 +17,14 @@ public class UserDto {
 
     private Integer id;
 
+    @Schema(name = "firstname",example = " anita")
     @NotNull(message = "the firstname can't be null")
-    @NotEmpty(message = " the firstname can't be empty")
     private String firstName;
 
     @NotNull(message = "the lastname can't be null")
-    @NotEmpty(message = "the lastname can't be empty")
     private String lastName;
 
     @NotNull(message = "the email can't be null")
-    @NotEmpty(message = "the email can't be null")
     @Email
     private String email;
 

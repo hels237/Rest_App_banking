@@ -2,6 +2,7 @@ package com.helscorp.banking.dto;
 
 
 import com.helscorp.banking.model.Account;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -10,7 +11,7 @@ import lombok.Data;
 @Data
 @Builder
 public class AccountDto {
-
+    @Schema(name = "id",example = " id = 1")
     private Integer id;
 
 

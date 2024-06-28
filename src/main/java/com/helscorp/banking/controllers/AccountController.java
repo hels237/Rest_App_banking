@@ -2,12 +2,14 @@ package com.helscorp.banking.controllers;
 
 import com.helscorp.banking.dto.AccountDto;
 import com.helscorp.banking.service.AccountService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "account api")
 @RestController
 @RequestMapping("/accounts")
 @RequiredArgsConstructor
